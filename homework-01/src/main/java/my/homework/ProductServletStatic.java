@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/product/*")
-public class ProductServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/product_static/*")
+public class ProductServletStatic extends HttpServlet {
+    static ProductRepository globalProdRep;
     private ProductRepository productRepository;
 
     public ProductRepository getProductRepository() {
@@ -34,6 +35,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        globalProdRep = productRepository;
         PrintWriter wr = resp.getWriter();
         wr.println("<table>");
         wr.println("<tr>");
@@ -43,13 +45,11 @@ public class ProductServlet extends HttpServlet {
 
         for (Product product : productRepository.findAll()) {
             wr.println("<tr>");
-            wr.println("<td><a href='" + "info/?param1=" + product.getId() +
-                    "&param2=" + product.getTitle() +
-                    "&param3=" + product.getCost() +
-                    "&param4=" + product.getRuTitle() + "'>" + product.getId() + "</a></td>");
+            wr.println("<td><a href='" + "info_static/?param1=" + product.getId() + "'>" + product.getId() + "</a></td>");
             wr.println("<td>" + product.getTitle() + "</td>");
             wr.println("</tr>");
         }
+
         wr.println("</table>");
     }
 

@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/product/info/*")
-public class ProductInfo extends HttpServlet {
+@WebServlet(urlPatterns = "/product_static/info_static/*")
+public class ProductInfoStatic extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long productId = Integer.parseInt(req.getParameter("param1"));
-        String productTitle = req.getParameter("param2");
-        double productCost = Double.parseDouble(req.getParameter("param3"));
-        String productRuTitle = req.getParameter("param4");
+        Product product = ProductServletStatic.globalProdRep.findById(productId);
 
         PrintWriter wr = resp.getWriter();
         wr.println("<table>");
@@ -32,13 +30,13 @@ public class ProductInfo extends HttpServlet {
         wr.println("</tr>");
 
         wr.println("<tr>");
-        wr.println("<td>" + productId + "</td>");
+        wr.println("<td>" + product.getId() + "</td>");
         wr.println("<th></th>");
-        wr.println("<td>" + productTitle + "</td>");
+        wr.println("<td>" + product.getTitle() + "</td>");
         wr.println("<th></th>");
-        wr.println("<td>" + productCost + "</td>");
+        wr.println("<td>" + product.getCost() + "</td>");
         wr.println("<th></th>");
-        wr.println("<td>" + productRuTitle + "</td>");
+        wr.println("<td>" + product.getRuTitle() + "</td>");
         wr.println("</tr>");
 
         wr.println("</table>");
