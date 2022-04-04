@@ -1,11 +1,15 @@
 package my.homework;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        ProductService productService = new ProductService();
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ProductService productService = context.getBean("productService", ProductService.class);
         productService.addProduct();
         productService.listCommand();
 

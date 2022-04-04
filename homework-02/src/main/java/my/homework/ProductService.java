@@ -2,9 +2,11 @@ package my.homework;
 
 import my.homework.product_preset.Product;
 import my.homework.product_preset.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
+@Service
 public class ProductService {
     private final ProductRepository productRepository;
     private final Cart cart;
@@ -89,8 +91,8 @@ public class ProductService {
             for (int i = 0; i < cart.findAll().size(); i++) {
                 System.out.println(
                         "Id: " + cart.findAll().get(i).getId() +
-                                "  Title: " + cart.findAll().get(i).getTitle() +
-                                "  Coast: " + cart.findAll().get(i).getCost());
+                                "  Продукт: " + cart.findAll().get(i).getTitle() +
+                                "  Цена: " + cart.findAll().get(i).getCost());
             }
         }
         System.out.println();
