@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/product/*")
+
 public class ProductServlet extends HttpServlet {
     private ProductRepository productRepository;
 
@@ -43,7 +44,7 @@ public class ProductServlet extends HttpServlet {
 
         for (Product product : productRepository.findAll()) {
             wr.println("<tr>");
-            wr.println("<td><a href='" + "info/?param1=" + product.getId() +
+            wr.println("<td><a href='" + "product/info/?param1=" + product.getId() +
                     "&param2=" + product.getTitle() +
                     "&param3=" + product.getCost() +
                     "&param4=" + product.getRuTitle() + "'>" + product.getId() + "</a></td>");

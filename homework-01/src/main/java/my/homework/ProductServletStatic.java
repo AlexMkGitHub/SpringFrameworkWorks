@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/product_static/*")
+
 public class ProductServletStatic extends HttpServlet {
     static ProductRepository globalProdRep;
     private ProductRepository productRepository;
@@ -45,7 +46,7 @@ public class ProductServletStatic extends HttpServlet {
 
         for (Product product : productRepository.findAll()) {
             wr.println("<tr>");
-            wr.println("<td><a href='" + "info_static/?param1=" + product.getId() + "'>" + product.getId() + "</a></td>");
+            wr.println("<td><a href='" + "product_static/info_static/?param1=" + product.getId() + "'>" + product.getId() + "</a></td>");
             wr.println("<td>" + product.getTitle() + "</td>");
             wr.println("</tr>");
         }
