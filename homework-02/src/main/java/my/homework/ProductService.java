@@ -47,16 +47,16 @@ public class ProductService {
     }
 
     public void listCommand() {
-        System.out.println("Список комманд: С");
-        System.out.println("Каталог продуктов: L");
-        System.out.println("Добавить продукт в корзину: A");
-        System.out.println("Удалить продукт из корзины: D");
-        System.out.println("Список продуктов в корзине: P");
-        System.out.println();
+        System.out.println("" +
+                "Список комманд: С\n" +
+                "Каталог продуктов: L\nД" +
+                "обавить продукт в корзину: A\n" +
+                "Удалить продукт из корзины: D\nС" +
+                "писок продуктов в корзине: P\n");
     }
 
     public void addProductInCart() {
-        System.out.print("Введите Id продукта для добавления в корзину:");
+        System.out.print("Введите Id продукта для добавления в корзину: ");
         productId = sc.nextLong();
         if (productId > productRepository.findAll().size()) {
             System.out.println("Нет продукта с таким Id!");
@@ -64,7 +64,6 @@ public class ProductService {
         }
         cart.insert(productRepository.findById(productId));
         System.out.println("Продукт " + productRepository.findById(productId).getRuTitle() + " добавлен в корзину.");
-        System.out.println();
     }
 
     public void deleteProductFromCart() {
@@ -79,7 +78,6 @@ public class ProductService {
             return;
         }
         System.out.println("Продукт " + cart.findById(productId).getRuTitle() + " удален из корзины.");
-        System.out.println();
         cart.delete(productId);
     }
 

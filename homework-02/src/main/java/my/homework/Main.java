@@ -15,7 +15,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         for (; ; ) {
-            System.out.print("Введите команду...");
+            System.out.print("Введите команду: ");
             String command = sc.nextLine();
             System.out.println();
 
