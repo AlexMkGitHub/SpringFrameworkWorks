@@ -60,7 +60,7 @@
                     <url>http://localhost:8080/manager/text</url>
                     <username>admin</username>
                     <password>admin</password>
-                    <path>/servlet-homework-app/</path>
+                    <path>/servlet-homework-mvc/</path>
                 </configuration>
             </plugin>
         </plugins>

@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>EShop application</title>
+    <title>ProductShop application</title>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">EShop</a>
+    <a class="navbar-brand" href="#">ProductShop</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,11 +35,12 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <form th:action="@{/user}" th:method="post" th:object="${user}">
+            <form th:action="@{/product}" th:method="post" th:object="${product}">
                 <input th:field="*{id}" type="hidden" id="id" name="id" >
                 <div class="form-group">
-                    <label>Username</label>
-                    <input th:field="*{username}" type="text" class="form-control" id="name" name="username" placeholder="Enter username">
+                    <label>Product</label>
+                    <input th:field="*{title}" type="text" class="form-control" id="name" name="title" placeholder="Enter product title">
+                    <input th:field="*{cost}" type="text" class="form-control" id="cost" name="cost" placeholder="Enter product cost">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
