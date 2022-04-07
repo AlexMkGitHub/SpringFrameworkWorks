@@ -35,8 +35,6 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <td th:text="${product.title}">Milk</td>
-            <td th:text="${product.cost}">57</td>
             <a class="btn btn-primary" th:href="@{/product/new}">Add Product</a>
         </div>
 
@@ -56,7 +54,8 @@
                     <td th:text="${product.title}">Milk</td>
                     <td th:text="${product.cost}">57</td>
                     <td>
-                        <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i
+                                class="fas fa-edit"></i></a>
                         <a class="btn btn-danger" href="#"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>

@@ -41,7 +41,7 @@ public class ProductController {
 
     @GetMapping("/new")
     public String newForm(Model model) {
-        //model.addAttribute("product");
+        model.addAttribute("product", productRepository.save(new Product("", 0)));
         return "product_form";
     }
 }
