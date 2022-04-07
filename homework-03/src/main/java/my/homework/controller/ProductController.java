@@ -39,6 +39,12 @@ public class ProductController {
         return "redirect:/product";
     }
 
+    @GetMapping("/delete/{id}")
+    public String productFormDelete(@PathVariable("id") long id) {
+        productRepository.delete(id);
+        return "redirect:/product";
+    }
+
     @GetMapping("/new")
     public String newForm(Model model) {
         model.addAttribute("product", productRepository.save(new Product("", 0)));
