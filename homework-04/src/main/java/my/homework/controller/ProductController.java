@@ -37,9 +37,13 @@ public class ProductController {
     public String productSave(Product product) {
         if (product.getTitle().equals("")) {
             productRepository.delete(product.getId());
-        } else {
-            productRepository.save(product);
+            return "redirect:/product";
         }
+        if (product.getCost() < 0 || product.getCost() > 100000) {
+            productRepository.delete(product.getId());
+            return "redirect:/product";
+        }
+        productRepository.save(product);
         return "redirect:/product";
     }
 
