@@ -1,9 +1,16 @@
 package my.homework.product_preset;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class Product {
 
     private Long id;
+    @NotBlank
     private String title;
+    @Min(0)
+    @Max(100000)
     private double cost;
 
     public Product(String title, double cost) {

@@ -5,10 +5,13 @@ import my.homework.product_preset.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @RequestMapping("/product")
 @Controller
@@ -34,14 +37,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public String productSave(Product product) {
-        if (product.getTitle().equals("")) {
-            productRepository.delete(product.getId());
-            return "redirect:/product";
-        }
-        if (product.getCost() < 0 || product.getCost() > 100000) {
-            productRepository.delete(product.getId());
-            return "redirect:/product";
+    public String productSave(@Valid Product product, BindingResult binding) {
+        if (binding.hasErrors()) {
+            return "product_form";
         }
         productRepository.save(product);
         return "redirect:/product";
