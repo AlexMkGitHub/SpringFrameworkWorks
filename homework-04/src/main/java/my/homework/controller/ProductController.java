@@ -35,7 +35,11 @@ public class ProductController {
 
     @PostMapping
     public String productSave(Product product) {
-        productRepository.save(product);
+        if (product.getTitle().equals("")) {
+            productRepository.delete(product.getId());
+        } else {
+            productRepository.save(product);
+        }
         return "redirect:/product";
     }
 
