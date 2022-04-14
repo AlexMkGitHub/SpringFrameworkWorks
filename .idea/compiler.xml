@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="homework-04" />
         <module name="1" />
         <module name="homework-03" />
         <module name="homework-02" />
@@ -15,5 +16,10 @@
     <bytecodeTargetLevel>
       <module name="firstapp" target="1.7" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="homework-04" options="-parameters" />
+    </option>
   </component>
 </project>
