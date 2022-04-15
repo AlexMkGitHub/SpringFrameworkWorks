@@ -28,7 +28,6 @@ public class Main {
 //        em.getTransaction().commit();
 
         ProductDao pd = new ProductDao();
-        pd.saveOrUpdate(new Product("Milk", 75));
 
         em.close();
         emFactory.close();
