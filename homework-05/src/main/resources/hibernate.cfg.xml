@@ -15,6 +15,7 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.format_sql">true</property>
+        <mapping class="my.homework.model.Product"/>
 
     </session-factory>
 </hibernate-configuration>

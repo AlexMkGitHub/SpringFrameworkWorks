@@ -1,15 +1,27 @@
 package my.homework.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String title;
 
-    private double cost;
+    @Column(nullable = false)
+    private int price;
 
-    public Product(String title, double cost) {
+    public Product() {
+    }
+
+    public Product(String title, int price) {
         this.title = title;
-        this.cost = cost;
+        this.price = price;
     }
 
     public Long getId() {
@@ -28,12 +40,12 @@ public class Product {
         this.title = title;
     }
 
-    public double getCost() {
-        return cost;
+    public int getPrice() {
+        return price;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setPrice(int price) {
+        this.price = price;
     }
-
 }
+
