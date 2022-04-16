@@ -29,7 +29,9 @@ public class Main {
 
         ProductDao pd = new ProductDao();
 
-        System.out.println(pd.findAll());
+//        System.out.println(pd.findAll());
+        pd.findAll().forEach(System.out::println);
+        System.out.println(pd.findById(4l));
 
         em.close();
         emFactory.close();

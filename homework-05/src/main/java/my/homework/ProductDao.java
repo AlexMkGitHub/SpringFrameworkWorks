@@ -21,13 +21,11 @@ public class ProductDao {
 
     public Product findById(Long id) {
         Product product = em.find(Product.class, id);
-        closeConnection();
         return product;
     }
 
     public List<Product> findAll() {
         List<Product> products = em.createQuery("select p from Product p", Product.class).getResultList();
-        closeConnection();
         return products;
     }
 
@@ -36,7 +34,6 @@ public class ProductDao {
         Product product = em.find(Product.class, id);
         em.remove(product);
         em.getTransaction().commit();
-        closeConnection();
     }
 
     public void saveOrUpdate(Product product) {
@@ -47,7 +44,6 @@ public class ProductDao {
             em.persist(product);
         }
         em.getTransaction().commit();
-        closeConnection();
 
 //        Session session = em.unwrap(Session.class);
 //        session.saveOrUpdate(product);
