@@ -29,6 +29,8 @@ public class Main {
 
         ProductDao pd = new ProductDao();
 
+        System.out.println(pd.findAll());
+
         em.close();
         emFactory.close();
     }
