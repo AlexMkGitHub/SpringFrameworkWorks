@@ -33,6 +33,7 @@ public class Main {
         pd.findAll().forEach(System.out::println);
         System.out.println(pd.findById(4l));
 
+        pd.closeConnection();
         em.close();
         emFactory.close();
     }
