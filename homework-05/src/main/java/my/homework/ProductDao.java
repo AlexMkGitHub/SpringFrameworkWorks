@@ -31,7 +31,12 @@ public class ProductDao {
     }
 
     public void deleteById(Long id){
+        em.getTransaction().begin();
 
+        Product product = em.find(Product.class, id);
+        em.remove(product);
+        em.getTransaction().commit();
+        closeConnection();
     }
 
     public Product saveOrUpdate(Product product){
