@@ -1,6 +1,7 @@
 package my.homework.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,8 @@ public class Buyer {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "buyer")
-    private List<Product> products;
+    @OneToMany(mappedBy = "buyer", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public Buyer() {
     }
