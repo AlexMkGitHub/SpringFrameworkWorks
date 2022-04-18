@@ -27,7 +27,7 @@ public class Main {
 //        em.persist(new Product("Orange", 185));
 //        em.getTransaction().commit();
 
-        ProductDao pd = new ProductDao();
+        ProductDao pd = new ProductDao(emFactory);
 
 //        System.out.println(pd.findAll());
         pd.findAll().forEach(System.out::println);

@@ -2,7 +2,6 @@ package my.homework;
 
 import my.homework.model.Product;
 import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,10 +11,8 @@ public class ProductDao {
     private EntityManagerFactory emFactory;
     private EntityManager em;
 
-    public ProductDao() {
-        emFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
+    public ProductDao(EntityManagerFactory emFactory) {
+        this.emFactory = emFactory;
         em = emFactory.createEntityManager();
     }
 
