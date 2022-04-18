@@ -1,9 +1,17 @@
 package my.homework.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
+@NamedQueries({
+        @NamedQuery(name = "findAllProducts", query = "from Product"),
+        @NamedQuery(name = "countAllProducts", query = "select count(p) from Product p"),
+        @NamedQuery(name = "deleteProducts", query = "delete from Product where id = :id")
+})
+
 public class Product {
 
     @Id
@@ -16,8 +24,10 @@ public class Product {
     @Column
     private int price;
 
-    @ManyToOne
-    private Buyer buyer;
+    @OneToMany(mappedBy = "product",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
+            orphanRemoval = true)
+    private List<Buyer> buyers = new ArrayList<>();
 
     public Product() {
     }
@@ -31,12 +41,12 @@ public class Product {
         return id;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
+    public List<Buyer> getBuyers() {
+        return buyers;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
+    public void setBuyers(List<Buyer> buyers) {
+        this.buyers = buyers;
     }
 
     public void setId(Long id) {
