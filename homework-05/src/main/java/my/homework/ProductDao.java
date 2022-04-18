@@ -20,13 +20,11 @@ public class ProductDao {
     }
 
     public Product findById(Long id) {
-        Product product = em.find(Product.class, id);
-        return product;
+        return em.find(Product.class, id);
     }
 
     public List<Product> findAll() {
-        List<Product> products = em.createQuery("select p from Product p", Product.class).getResultList();
-        return products;
+        return em.createQuery("select p from Product p", Product.class).getResultList();
     }
 
     public void deleteById(Long id) {
