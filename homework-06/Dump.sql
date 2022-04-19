@@ -26,7 +26,7 @@ CREATE TABLE `buyers` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `buyers` (
 
 LOCK TABLES `buyers` WRITE;
 /*!40000 ALTER TABLE `buyers` DISABLE KEYS */;
+INSERT INTO `buyers` VALUES (1,'Alex'),(2,'Daniel'),(3,'Maria'),(4,'Maria'),(5,'Goodwin'),(6,'Alex'),(7,'Daniel'),(8,'Maria'),(9,'Maria'),(10,'Goodwin');
 /*!40000 ALTER TABLE `buyers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,7 +54,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `FKk28lyx5vbpu44sheaeeah6ucw` (`buyer_id`),
   CONSTRAINT `FKk28lyx5vbpu44sheaeeah6ucw` FOREIGN KEY (`buyer_id`) REFERENCES `buyers` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +63,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,45,'Bread',1),(2,85,'Buckwheat',1),(3,65,'Onion',1),(4,70,'Potatoes',1),(5,75,'Milk',2),(6,115,'Apple',2),(7,185,'Orange',2),(8,70,'Potatoes',2),(9,95,'Spaghetti',2),(10,70,'Potatoes',3),(11,115,'Apple',3),(12,250,'Butter',3),(13,95,'Spaghetti',3),(14,85,'Buckwheat',3),(15,75,'Milk',3),(16,65,'Onion',3),(17,70,'Potatoes',4),(18,115,'Apple',4),(19,75,'Milk',4),(20,65,'Onion',4),(21,75,'Milk',5),(22,115,'Apple',5),(23,185,'Orange',5),(24,70,'Potatoes',5),(25,250,'Butter',5),(26,85,'Buckwheat',5),(27,95,'Spaghetti',5),(28,45,'Bread',6),(29,85,'Buckwheat',6),(30,65,'Onion',6),(31,70,'Potatoes',6),(32,75,'Milk',7),(33,115,'Apple',7),(34,185,'Orange',7),(35,70,'Potatoes',7),(36,95,'Spaghetti',7),(37,70,'Potatoes',8),(38,115,'Apple',8),(39,250,'Butter',8),(40,95,'Spaghetti',8),(41,85,'Buckwheat',8),(42,75,'Milk',8),(43,65,'Onion',8),(44,70,'Potatoes',9),(45,115,'Apple',9),(46,75,'Milk',9),(47,65,'Onion',9),(48,75,'Milk',10),(49,115,'Apple',10),(50,185,'Orange',10),(51,70,'Potatoes',10),(52,250,'Butter',10),(53,85,'Buckwheat',10),(54,95,'Spaghetti',10);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-18 23:58:23
+-- Dump completed on 2022-04-19  5:17:12

@@ -51,4 +51,14 @@ public class ProductDao {
         }
 
     }
+
+    public List<Product> findProductBuyers(long productId) {
+        EntityManager em = emFactory.createEntityManager();
+        List<Product> buyProducts = em.createQuery("select p from Product p where p.buyer.id = :productId", Product.class)
+                .setParameter("productId", productId)
+                .getResultList();
+        em.close();
+        return buyProducts;
+
+    }
 }

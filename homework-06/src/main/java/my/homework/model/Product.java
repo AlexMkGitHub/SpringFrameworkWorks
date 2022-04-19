@@ -1,16 +1,11 @@
 package my.homework.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "products")
-@NamedQueries({
-        @NamedQuery(name = "findAllProducts", query = "from Product"),
-        @NamedQuery(name = "countAllProducts", query = "select count(p) from Product p"),
-        @NamedQuery(name = "deleteProducts", query = "delete from Product where id = :id")
-})
+
 
 public class Product {
 
@@ -24,29 +19,28 @@ public class Product {
     @Column
     private int price;
 
-    @OneToMany(mappedBy = "product",
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE},
-            orphanRemoval = true)
-    private List<Buyer> buyers = new ArrayList<>();
+    @ManyToOne
+    private Buyer buyer;
 
     public Product() {
     }
 
-    public Product(String title, int price) {
+    public Product(String title, int price, Buyer buyer) {
         this.title = title;
         this.price = price;
+        this.buyer = buyer;
     }
 
     public Long getId() {
         return id;
     }
 
-    public List<Buyer> getBuyers() {
-        return buyers;
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public void setBuyers(List<Buyer> buyers) {
-        this.buyers = buyers;
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public void setId(Long id) {

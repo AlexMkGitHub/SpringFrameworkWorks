@@ -4,10 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class ByerDao {
+public class BuyerDao {
     private final EntityManagerFactory emFactory;
 
-    public ByerDao(EntityManagerFactory emFactory) {
+    public BuyerDao(EntityManagerFactory emFactory) {
         this.emFactory = emFactory;
     }
 
@@ -52,4 +52,12 @@ public class ByerDao {
 
     }
 
+//    public List<Buyer> findBuyProducts(long buyerId) {
+//        EntityManager em = emFactory.createEntityManager();
+//        List<Buyer> prodBuyers = em.createQuery("select b from Buyer b inner join b.id on Product.buyer.id  where b.id = :buyerId", Buyer.class)
+//                .setParameter("buyerId", buyerId)
+//                .getResultList();
+//        em.close();
+//        return prodBuyers;
+//    }
 }
