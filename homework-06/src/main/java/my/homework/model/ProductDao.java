@@ -52,7 +52,7 @@ public class ProductDao {
 
     }
 
-    public List<Product> findProductBuyers(long productId) {
+    public List<Product> findBuyProducts(long productId) {
         EntityManager em = emFactory.createEntityManager();
         List<Product> buyProducts = em.createQuery("select p from Product p where p.buyer.id = :productId", Product.class)
                 .setParameter("productId", productId)
@@ -61,4 +61,6 @@ public class ProductDao {
         return buyProducts;
 
     }
+
+
 }

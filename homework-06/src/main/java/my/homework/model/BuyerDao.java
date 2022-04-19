@@ -2,6 +2,7 @@ package my.homework.model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuyerDao {
@@ -52,12 +53,31 @@ public class BuyerDao {
 
     }
 
-//    public List<Buyer> findBuyProducts(long buyerId) {
-//        EntityManager em = emFactory.createEntityManager();
-//        List<Buyer> prodBuyers = em.createQuery("select b from Buyer b inner join b.id on Product.buyer.id  where b.id = :buyerId", Buyer.class)
-//                .setParameter("buyerId", buyerId)
-//                .getResultList();
-//        em.close();
-//        return prodBuyers;
-//    }
+    public List<Buyer> findProductsBuyer(long buyerId) {
+        EntityManager em = emFactory.createEntityManager();
+        List<Buyer> prodBuyers = em.createQuery("SELECT b FROM Buyer b, Product p WHERE b.id = p.buyer.id and b.id=:buyerId", Buyer.class)
+                .setParameter("buyerId", buyerId)
+                .getResultList();
+        em.close();
+        return prodBuyers;
+    }
+
+    public List<ListAll> listBuyersProducts() {
+        EntityManager em = emFactory.createEntityManager();
+        List<Object[]> listAll = em.createQuery("select b.id, b.name, p.id, p.title, p.price from Buyer b, Product p ", Object[].class).getResultList();
+        em.close();
+        List<ListAll> mediaList = new ArrayList<>();
+        for (Object[] objects : listAll) {
+            ListAll data = new ListAll();
+            data.setBuyerId((long) objects[0]);
+            data.setBuyerName((String) objects[1]);
+            data.setProductId((long) objects[2]);
+            data.setProductTittle((String) objects[3]);
+            data.setProductPrice((int) objects[4]);
+            mediaList.add(data);
+        }
+        return mediaList;
+    }
+
 }
+
