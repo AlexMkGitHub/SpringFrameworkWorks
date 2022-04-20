@@ -29,17 +29,10 @@ public class ProductController {
         if (productFilter.isEmpty()) {
             model.addAttribute("products", productRepository.findAll());
         } else {
-//            model.addAttribute("products", productRepository.findProductByTitleLike("%" + productFilter.get() + "%"));
             model.addAttribute("products", productRepository.findProductByIdLike(productFilter.get()));
         }
         return "product";
     }
-
-//    @GetMapping
-//    public String listProduct(Model model) {
-//        model.addAttribute("products", productRepository.findAll());
-//        return "product";
-//    }
 
     @GetMapping("/{id}")
     public String productForm(@PathVariable("id") long id, Model model) {
@@ -52,21 +45,18 @@ public class ProductController {
         if (binding.hasErrors()) {
             return "product_form";
         }
-//        productRepository.saveOrUpdate(product);
         productRepository.save(product);
         return "redirect:/product";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable long id) {
-//        productRepository.delete(id);
         productRepository.deleteById(id);
         return "redirect:/product";
     }
 
     @GetMapping("/new")
     public String newForm(Model model) {
-//        model.addAttribute("product", productRepository.saveOrUpdate(new Product("", 0)));
         model.addAttribute("product", productRepository.save(new Product("", 0)));
         return "product_form";
     }
