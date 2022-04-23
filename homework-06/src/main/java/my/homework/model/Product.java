@@ -1,6 +1,7 @@
 package my.homework.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -19,13 +20,13 @@ public class Product {
     @Column
     private int price;
 
-    @ManyToOne
-    private Buyer buyer;
+    @ManyToMany
+    private List<Buyer> buyer;
 
     public Product() {
     }
 
-    public Product(String title, int price, Buyer buyer) {
+    public Product(String title, int price, List<Buyer> buyer) {
         this.title = title;
         this.price = price;
         this.buyer = buyer;
@@ -33,14 +34,6 @@ public class Product {
 
     public Long getId() {
         return id;
-    }
-
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
     }
 
     public void setId(Long id) {
@@ -63,13 +56,12 @@ public class Product {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                '}';
+    public List<Buyer> getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(List<Buyer> buyer) {
+        this.buyer = buyer;
     }
 }
 

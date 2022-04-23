@@ -15,7 +15,7 @@ public class Buyer {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "buyer", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval = true)
+    @ManyToMany(mappedBy = "buyer", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     private List<Product> products = new ArrayList<>();
 
     public Buyer() {
