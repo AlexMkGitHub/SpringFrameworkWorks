@@ -24,12 +24,17 @@ public class ProductController {
 
 
     @GetMapping
-    public String listPage(@RequestParam Optional<Long> productFilter,
+    public String listPage(@RequestParam Optional<String> productTitleFilter, Optional<Long> productIdFilter,
                            Model model) {
-        if (productFilter.isEmpty()) {
+        if (productTitleFilter.isEmpty() && productIdFilter.isEmpty()) {
             model.addAttribute("products", productRepository.findAll());
         } else {
-            model.addAttribute("products", productRepository.findProductByIdLike(productFilter.get()));
+            if (productTitleFilter.isPresent() && productIdFilter.isEmpty()) {
+                model.addAttribute("products", productRepository.findProductByTitleLike("%" + productTitleFilter.get() + "%"));
+            } else {
+                model.addAttribute("products", productRepository.findProductByTitleLike("%" + productTitleFilter.get() + "%"));
+                model.addAttribute("products", productRepository.findProductByIdLike(productIdFilter.get()));
+            }
         }
         return "product";
     }
