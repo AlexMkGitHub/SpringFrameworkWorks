@@ -24,12 +24,16 @@ public class ProductController {
 
 
     @GetMapping
-    public String listPage(@RequestParam Optional<String> productTitleFilter, Optional<Long> productIdFilter,
+    public String listPage(@RequestParam Optional<String> productTitleFilter,
+                           @RequestParam Optional<Integer> page,
+                           @RequestParam Optional<Integer> size,
                            Model model) {
         String titleFilterValue = productTitleFilter
                 .filter(s -> !s.isBlank())
                 .orElse(null);
-        model.addAttribute("products", productService.findProductByFilter(titleFilterValue));
+        Integer pageValue = page.orElse(1) - 1;
+        Integer sizeValue = size.orElse(3);
+        model.addAttribute("products", productService.findProductByFilter(titleFilterValue, pageValue, sizeValue));
         return "product";
     }
 

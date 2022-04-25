@@ -43,7 +43,8 @@
 
                 <div class="form-group mb-2 mr-2">
                     <label for="productTitleFilter" class="sr-only">Product filter</label>
-                    <input type="text" class="form-control" id="productTitleFilter" th:value="${param.productTitleFilter}"
+                    <input type="text" class="form-control" id="productTitleFilter"
+                           th:value="${param.productTitleFilter}"
                            name="productTitleFilter" placeholder="Product Title filter">
                 </div>
 
@@ -57,10 +58,18 @@
             <table class="table table-bordered my-2">
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Id
+                        <a href="#"><i class="fa fa-sort-down"></i></a>
+                    </th>
+                    <th scope="col">Title
+                        <a href="#"><i class="fa fa-sort-down"></i></a>
+                    </th>
+                    <th scope="col">Cost
+                        <a href="#"><i class="fa fa-sort-down"></i></a>
+                    </th>
+                    <th scope="col">Actions
+                        <a href="#"><i class="fa fa-sort-down"></i></a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -83,6 +92,27 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div th:unless="${products.isEmpty()}" class="col-12">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+
+                    <li th:each="num : ${#numbers.sequence(1, products.totalPages)}"
+                        th:classappend="${num == products.number +1} ? 'active'"
+                        class="page-item">
+                        <a class="page-link" th:href="@{/product(page=${num}, size=${products.size})}">[[${num}]]
+                            <span th:if="${num == products.number + 1}" class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

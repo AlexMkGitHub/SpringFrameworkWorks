@@ -5,13 +5,13 @@ import my.homework.dto.ProductDto;
 import my.homework.product_preset.Product;
 import my.homework.product_preset.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -24,15 +24,13 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductDto> findProductByFilter(String titleFilter) {
+    public Page<ProductDto> findProductByFilter(String titleFilter, Integer page, Integer size) {
         Specification<Product> spec = Specification.where(null);
         if (titleFilter != null) {
             spec = spec.and(ProductSpecifications.titleContaining(titleFilter));
         }
-        return productRepository.findAll(spec)
-                .stream()
-                .map(ProductServiceImpl::productToDto)
-                .collect(Collectors.toList());
+        return productRepository.findAll(spec, PageRequest.of(page, size, Sort.by("id")))
+                .map(ProductServiceImpl::productToDto);
     }
 
 
