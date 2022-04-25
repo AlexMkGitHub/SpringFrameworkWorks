@@ -1,6 +1,7 @@
 package my.homework.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,8 @@ public class Product {
     @Column
     private int price;
 
-    @ManyToMany
-    private List<Buyer> buyer;
+    @ManyToMany(mappedBy = "products")
+    private List<Buyer> buyer = new ArrayList<>();
 
     public Product() {
     }
