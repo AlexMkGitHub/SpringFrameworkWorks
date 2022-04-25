@@ -3,6 +3,7 @@ package my.homework.dto;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class ProductDto {
     private Long id;
@@ -10,12 +11,13 @@ public class ProductDto {
     @Min(0)
     @Max(100000)
     @NotNull
-    private double price;
+    private BigDecimal price;
 
     public ProductDto() {
     }
 
-    public ProductDto(String title, double price) {
+    public ProductDto(Long id, String title, BigDecimal price) {
+        this.id = id;
         this.title = title;
         this.price = price;
     }
@@ -36,11 +38,11 @@ public class ProductDto {
         this.title = title;
     }
 
-    public double getCost() {
+    public BigDecimal getCost() {
         return price;
     }
 
-    public void setCost(double cost) {
+    public void setCost(BigDecimal cost) {
         this.price = cost;
     }
 

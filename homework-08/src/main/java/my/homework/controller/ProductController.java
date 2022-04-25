@@ -1,7 +1,7 @@
 package my.homework.controller;
 
-import my.homework.product_preset.Product;
-import my.homework.product_preset.ProductRepository;
+import my.homework.dto.ProductDto;
+import my.homework.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,54 +15,49 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
 
     @GetMapping
     public String listPage(@RequestParam Optional<String> productTitleFilter, Optional<Long> productIdFilter,
                            Model model) {
-        if (productTitleFilter.isEmpty() && productIdFilter.isEmpty()) {
-            model.addAttribute("products", productRepository.findAll());
-        } else {
-            if (productTitleFilter.isPresent() && productIdFilter.isEmpty()) {
-                model.addAttribute("products", productRepository.findProductByTitleLike("%" + productTitleFilter.get() + "%"));
-            } else {
-                model.addAttribute("products", productRepository.findProductByTitleLike("%" + productTitleFilter.get() + "%"));
-                model.addAttribute("products", productRepository.findProductByIdLike(productIdFilter.get()));
-            }
-        }
+        String titleFilterValue = productTitleFilter
+                .filter(s -> !s.isBlank())
+                .orElse(null);
+        model.addAttribute("products", productService.findProductByFilter(titleFilterValue));
         return "product";
     }
 
     @GetMapping("/{id}")
     public String productForm(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", productRepository.findById(id));
+        model.addAttribute("product", productService.findById(id));
         return "product_form";
     }
 
     @PostMapping
-    public String productSave(@Valid Product product, BindingResult binding) {
-        if (binding.hasErrors()) {
+    public String save(@Valid @ModelAttribute("product") ProductDto product, BindingResult binding) {
+        if (binding.hasErrors() || product.getTitle().isEmpty() || product.getCost() == null) {
             return "product_form";
+        } else {
+            productService.save(product);
         }
-        productRepository.save(product);
         return "redirect:/product";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable long id) {
-        productRepository.deleteById(id);
+        productService.deleteById(id);
         return "redirect:/product";
     }
 
     @GetMapping("/new")
     public String newForm(Model model) {
-        model.addAttribute("product", productRepository.save(new Product("", 0)));
+        model.addAttribute("product", new ProductDto());
         return "product_form";
     }
 }

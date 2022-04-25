@@ -9,7 +9,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @Column
     private String title;
@@ -25,11 +25,17 @@ public class Product {
         this.price = price;
     }
 
+    public Product(long id, String title, BigDecimal price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
