@@ -11,6 +11,7 @@
         <module name="homework-03" />
         <module name="homework-06" />
         <module name="homework-05" />
+        <module name="homework-08" />
         <module name="homework-07" />
         <module name="homework-02" />
         <module name="homework-01" />
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="homework-04" options="-parameters" />
       <module name="homework-07" options="-parameters" />
+      <module name="homework-08" options="-parameters" />
     </option>
   </component>
 </project>
