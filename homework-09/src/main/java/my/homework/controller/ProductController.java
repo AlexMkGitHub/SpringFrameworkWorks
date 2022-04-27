@@ -29,6 +29,7 @@ public class ProductController {
                            @RequestParam Optional<Integer> page,
                            @RequestParam Optional<Integer> size,
                            @RequestParam Optional<String> sortField,
+                           @RequestParam Optional<Integer> sortValue,
                            Model model) {
         String titleFilterValue = productTitleFilter
                 .filter(s -> !s.isBlank())
@@ -38,7 +39,8 @@ public class ProductController {
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
-        model.addAttribute("products", productService.findProductByFilter(titleFilterValue, pageValue, sizeValue, sortFieldValue));
+        Integer sortValueParm = sortValue.orElse(0);
+        model.addAttribute("products", productService.findProductByFilter(titleFilterValue, pageValue, sizeValue, sortFieldValue, sortValueParm));
         return "product";
     }
 

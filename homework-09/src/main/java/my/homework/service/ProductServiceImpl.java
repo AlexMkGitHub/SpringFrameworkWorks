@@ -24,13 +24,18 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public Page<ProductDto> findProductByFilter(String titleFilter, Integer page, Integer size, String sortField) {
+    public Page<ProductDto> findProductByFilter(String titleFilter, Integer page, Integer size, String sortField, int sortValue) {
         Specification<Product> spec = Specification.where(null);
         if (titleFilter != null) {
             spec = spec.and(ProductSpecifications.titleContaining(titleFilter));
         }
-        return productRepository.findAll(spec, PageRequest.of(page, size, Sort.by(sortField)))
-                .map(ProductServiceImpl::productToDto);
+        if (sortValue == 0) {
+            return productRepository.findAll(spec, PageRequest.of(page, size, Sort.by(sortField)))
+                    .map(ProductServiceImpl::productToDto);
+        } else {
+            return productRepository.findAll(spec, PageRequest.of(page, size, Sort.Direction.DESC, sortField))
+                    .map(ProductServiceImpl::productToDto);
+        }
     }
 
 
