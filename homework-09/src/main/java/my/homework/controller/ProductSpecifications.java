@@ -9,7 +9,7 @@ public final class ProductSpecifications {
         return (root, query, cb) -> cb.like(root.get("title"), "%" + title + "%");
     }
 
-    public static Specification<Product> costContaining(long id) {
+    public static Specification<Product> priceContaining(long id) {
         return (root, query, cb) -> cb.like(root.get("id"), id + "%");
     }
 }

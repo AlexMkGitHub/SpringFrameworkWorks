@@ -29,8 +29,6 @@
 
             </form>
         </div>
-
-
         <div class="col-12">
             <table class="table table-bordered my-2">
                 <thead>
@@ -48,7 +46,7 @@
                 <tr th:unless="${products.isEmpty()}" th:each="product : ${products}">
                     <th scope="row" th:text="${product.id}">1</th>
                     <td th:text="${product.title}">Milk</td>
-                    <td th:text="${product.cost}">57</td>
+                    <td th:text="${product.price}">57</td>
                     <td th:unless="${products.isEmpty()}">
                         <a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i
                                 class="fas fa-edit"></i></a>

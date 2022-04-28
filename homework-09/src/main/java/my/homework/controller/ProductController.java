@@ -45,18 +45,19 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String productForm(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", productService.findById(id));
+    public String productForm(@PathVariable long id, Model model) {
+        model.addAttribute("product", productService.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found")));
         return "product_form";
     }
 
     @PostMapping
     public String save(@Valid @ModelAttribute("product") ProductDto product, BindingResult binding) {
-        if (binding.hasErrors() || product.getTitle().isEmpty() || product.getCost() == null) {
+        if (binding.hasErrors() || product.getTitle().isEmpty() || product.getPrice() == null) {
+            binding.rejectValue("title", "", "Enter all data");
             return "product_form";
-        } else {
-            productService.save(product);
         }
+        productService.save(product);
         return "redirect:/product";
     }
 

@@ -46,12 +46,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto save(ProductDto product) {
-        return productToDto(productRepository.save(new Product(
-                product.getId(),
-                product.getTitle(),
-                product.getCost()
-        )));
+        return productToDto(productRepository.save(
+                new Product(
+                        product.getId(),
+                        product.getTitle(),
+                        product.getPrice()
+                )));
     }
+
 
     @Override
     public void deleteById(long id) {
@@ -62,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
         return new ProductDto(
                 product.getId(),
                 product.getTitle(),
-                product.getCost()
+                product.getPrice()
         );
     }
 }

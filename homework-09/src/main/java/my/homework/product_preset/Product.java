@@ -11,7 +11,7 @@ public class Product {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
     @Column
@@ -20,18 +20,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(String title, BigDecimal price) {
-        this.title = title;
-        this.price = price;
-    }
-
     public Product(long id, String title, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.price = price;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -47,12 +42,11 @@ public class Product {
         this.title = title;
     }
 
-    public BigDecimal getCost() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.price = cost;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
-
 }

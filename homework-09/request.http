@@ -1,0 +1,22 @@
+GET http://127.0.0.1:8080/rest/v1/product/all
+
+###
+
+POST  http://127.0.0.1:8080/rest/v1/product
+Content-Type: application/json
+
+ {
+      "title": "Bread1332",
+      "price": 0.0
+    }
+
+###
+
+PUT http://127.0.0.1:8080/rest/v1/product
+Content-Type: application/json
+
+{
+  "id": 12,
+  "title": "Bread12",
+  "price": 320.0
+}
