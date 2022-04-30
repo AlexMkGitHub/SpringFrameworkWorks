@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RequestMapping("/product")
@@ -26,6 +27,7 @@ public class ProductController {
 
     @GetMapping
     public String listPage(@RequestParam Optional<String> productTitleFilter,
+                           @RequestParam Optional<BigDecimal> productPriceFilter,
                            @RequestParam Optional<Integer> page,
                            @RequestParam Optional<Integer> size,
                            @RequestParam Optional<String> sortField,
@@ -34,20 +36,21 @@ public class ProductController {
         String titleFilterValue = productTitleFilter
                 .filter(s -> !s.isBlank())
                 .orElse(null);
+        BigDecimal priceFilterValue = productPriceFilter.orElse(null);
         Integer pageValue = page.orElse(1) - 1;
         Integer sizeValue = size.orElse(3);
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
-        Integer sortValueParm = sortValue.orElse(0);
-        model.addAttribute("products", productService.findProductByFilter(titleFilterValue, pageValue, sizeValue, sortFieldValue, sortValueParm));
+        Integer sortValueParam = sortValue.orElse(0);
+        model.addAttribute("products", productService.findProductByFilter(titleFilterValue, priceFilterValue, pageValue, sizeValue, sortFieldValue, sortValueParam));
         return "product";
     }
 
     @GetMapping("/{id}")
     public String productForm(@PathVariable long id, Model model) {
         model.addAttribute("product", productService.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found")));
+                .orElseThrow(() -> new NotFoundException("Product not found")));
         return "product_form";
     }
 

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -24,10 +25,13 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public Page<ProductDto> findProductByFilter(String titleFilter, Integer page, Integer size, String sortField, int sortValue) {
+    public Page<ProductDto> findProductByFilter(String titleFilter, BigDecimal priceFilter, Integer page, Integer size, String sortField, int sortValue) {
         Specification<Product> spec = Specification.where(null);
         if (titleFilter != null) {
             spec = spec.and(ProductSpecifications.titleContaining(titleFilter));
+        }
+        if (priceFilter != null) {
+            spec = spec.and(ProductSpecifications.priceContaining(priceFilter));
         }
         if (sortValue == 0) {
             return productRepository.findAll(spec, PageRequest.of(page, size, Sort.by(sortField)))
@@ -43,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
     public Optional<ProductDto> findById(long id) {
         return productRepository.findById(id).map(ProductServiceImpl::productToDto);
     }
+
 
     @Override
     public ProductDto save(ProductDto product) {

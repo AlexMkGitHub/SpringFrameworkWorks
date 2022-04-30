@@ -1,6 +1,7 @@
 package my.homework.rest;
 
 import my.homework.controller.NotFoundException;
+import my.homework.dto.ErrorDto;
 import my.homework.dto.ProductDto;
 import my.homework.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -16,14 +18,17 @@ import java.util.Optional;
 public class ProductResource {
 
     private final ProductService productService;
+    private ErrorDto errorDto;
 
     @Autowired
     public ProductResource(ProductService productService) {
         this.productService = productService;
+        this.errorDto = new ErrorDto();
     }
 
     @GetMapping("/all")
     private Page<ProductDto> findAll(@RequestParam Optional<String> productTitleFilter,
+                                     @RequestParam Optional<BigDecimal> productPriceFilter,
                                      @RequestParam Optional<Integer> page,
                                      @RequestParam Optional<Integer> size,
                                      @RequestParam Optional<String> sortField,
@@ -31,14 +36,15 @@ public class ProductResource {
         String titleFilterValue = productTitleFilter
                 .filter(s -> !s.isBlank())
                 .orElse(null);
+        BigDecimal priceFilterValue = productPriceFilter.orElse(null);
         Integer pageValue = page.orElse(1) - 1;
         Integer sizeValue = size.orElse(3);
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
-        Integer sortValueParm = sortValue.orElse(0);
+        Integer sortValueParam = sortValue.orElse(0);
 
-        return productService.findProductByFilter(titleFilterValue, pageValue, sizeValue, sortFieldValue, sortValueParm);
+        return productService.findProductByFilter(titleFilterValue, priceFilterValue, pageValue, sizeValue, sortFieldValue, sortValueParam);
     }
 
     @GetMapping("/{id}/id")
@@ -62,6 +68,8 @@ public class ProductResource {
         return productService.save(product);
     }
 
+
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler
     public String notFoundException(NotFoundException ex) {
@@ -79,4 +87,8 @@ public class ProductResource {
     public String sqlException(SQLException ex) {
         return ex.getMessage();
     }
+
+
+
+
 }
