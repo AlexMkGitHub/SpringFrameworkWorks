@@ -1,5 +1,6 @@
 package my.homework.controller;
 
+import my.homework.dto.ErrorDto;
 import my.homework.dto.ProductDto;
 import my.homework.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+    private ErrorDto ed;
 
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-
 
     @GetMapping
     public String listPage(@RequestParam Optional<String> productTitleFilter,
@@ -38,7 +39,7 @@ public class ProductController {
                 .orElse(null);
         BigDecimal priceFilterValue = productPriceFilter.orElse(null);
         Integer pageValue = page.orElse(1) - 1;
-        Integer sizeValue = size.orElse(3);
+        Integer sizeValue = size.orElse(5);
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
@@ -50,7 +51,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public String productForm(@PathVariable long id, Model model) {
         model.addAttribute("product", productService.findById(id)
-                .orElseThrow(() -> new NotFoundException("Product not found")));
+                .orElseThrow(() -> new NotFoundException("Product not found!")));
         return "product_form";
     }
 
@@ -78,8 +79,10 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler
-    public String notFoundExceptionHandler(Model model, NotFoundException ex) {
+    public String notFoundException(Model model, NotFoundException ex) {
         model.addAttribute("message", ex.getMessage());
         return "not_found";
     }
+
+
 }

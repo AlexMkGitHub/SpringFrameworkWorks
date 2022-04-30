@@ -13,7 +13,7 @@ public final class ProductSpecifications {
     }
 
     public static Specification<Product> priceContaining(BigDecimal price) {
-        return (root, query, cb) -> cb.equal(root.get("price"), price);
+        return (root, query, cb) -> cb.greaterThanOrEqualTo(root.get("price"), price);
     }
 
 }
