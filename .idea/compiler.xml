@@ -14,7 +14,7 @@
         <module name="homework-08" />
         <module name="homework-07" />
         <module name="homework-09" />
-        <module name="homework-10 (1) (com.example)" />
+        <module name="homework-10" />
         <module name="homework-02" />
         <module name="homework-01" />
       </profile>
@@ -22,6 +22,7 @@
     <bytecodeTargetLevel>
       <module name="firstapp" target="1.7" />
       <module name="homework-10" target="11" />
+      <module name="homework-10 (1) (com.example)" target="11" />
       <module name="homework-10 (2)" target="11" />
     </bytecodeTargetLevel>
   </component>
