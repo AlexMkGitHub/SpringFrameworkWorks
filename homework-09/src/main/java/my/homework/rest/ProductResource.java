@@ -36,7 +36,7 @@ public class ProductResource {
                 .orElse(null);
         BigDecimal priceFilterValue = productPriceFilter.orElse(null);
         Integer pageValue = page.orElse(1) - 1;
-        Integer sizeValue = size.orElse(3);
+        Integer sizeValue = size.orElse(10);
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
