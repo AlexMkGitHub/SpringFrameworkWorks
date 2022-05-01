@@ -1,30 +1,39 @@
 package my.homework.dto;
 
 import my.homework.controller.NotFoundException;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.sql.SQLException;
 
-public  class ErrorDto {
+public  class ErrorDto extends RuntimeException {
 
+private Model model;
+private Exception ex;
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @Autowired
+    public ErrorDto(Model model, Exception ex) {
+        this.model = model;
+        this.ex = ex;
+    }
+
+    public ErrorDto(Exception ex) {
+        this.ex = ex;
+    }
+
     @ExceptionHandler
-    public String notFoundException(NotFoundException ex) {
+    public static String notFoundException(NotFoundException ex) {
         return ex.getMessage();
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler
-    public String illegalArgumentException(IllegalArgumentException ex) {
+    public static String illegalArgumentException(IllegalArgumentException ex) {
         return ex.getMessage();
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
-    public String sqlException(SQLException ex) {
+    public static String sqlException(SQLException ex) {
         return ex.getMessage();
     }
 

@@ -18,12 +18,10 @@ import java.util.Optional;
 public class ProductResource {
 
     private final ProductService productService;
-    private ErrorDto errorDto;
 
     @Autowired
     public ProductResource(ProductService productService) {
         this.productService = productService;
-        this.errorDto = new ErrorDto();
     }
 
     @GetMapping("/all")
@@ -38,7 +36,7 @@ public class ProductResource {
                 .orElse(null);
         BigDecimal priceFilterValue = productPriceFilter.orElse(null);
         Integer pageValue = page.orElse(1) - 1;
-        Integer sizeValue = size.orElse(3);
+        Integer sizeValue = size.orElse(10);
         String sortFieldValue = sortField
                 .filter(s -> !s.isBlank())
                 .orElse("id");
@@ -69,26 +67,23 @@ public class ProductResource {
     }
 
 
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler
-    public String notFoundException(NotFoundException ex) {
-        return ex.getMessage();
+    public String notFound(NotFoundException ex) {
+        return ErrorDto.notFoundException(ex);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler
-    public String illegalArgumentException(IllegalArgumentException ex) {
-        return ex.getMessage();
+    public String illegalArgument(IllegalArgumentException ex) {
+        return ErrorDto.illegalArgumentException(ex);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
     public String sqlException(SQLException ex) {
-        return ex.getMessage();
+        return ErrorDto.sqlException(ex);
     }
-
-
 
 
 }
