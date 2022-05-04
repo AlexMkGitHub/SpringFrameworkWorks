@@ -24,6 +24,7 @@
       <module name="homework-10" target="11" />
       <module name="homework-10 (1) (com.example)" target="11" />
       <module name="homework-10 (2)" target="11" />
+      <module name="homework-11" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

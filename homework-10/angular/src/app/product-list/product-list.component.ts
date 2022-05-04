@@ -21,4 +21,8 @@ export class ProductListComponent implements OnInit {
         console.error(err);
       })
   }
+
+  delete(id: number | null) {
+
+  }
 }

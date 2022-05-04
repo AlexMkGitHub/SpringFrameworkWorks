@@ -10,6 +10,7 @@ public class ProductDto {
     private Long id;
 
     @NotBlank
+    @NotNull
     private String title;
 
     @Min(0)
