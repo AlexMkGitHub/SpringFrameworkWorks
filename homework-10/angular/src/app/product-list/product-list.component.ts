@@ -23,6 +23,6 @@ export class ProductListComponent implements OnInit {
   }
 
   delete(id: number | null) {
-
+this.productService.delete(id)
   }
 }
