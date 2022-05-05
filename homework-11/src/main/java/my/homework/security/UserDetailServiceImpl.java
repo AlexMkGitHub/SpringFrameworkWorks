@@ -1,6 +1,6 @@
 package my.homework.security;
 
-import my.homework.user_preset.UserRepository;
+import my.homework.user.user_preset.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

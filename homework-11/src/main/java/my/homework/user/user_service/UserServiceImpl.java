@@ -1,9 +1,9 @@
-package my.homework.user_service;
+package my.homework.user.user_service;
 
-import my.homework.user_controller.UserSpecifications;
-import my.homework.user_dto.UserDto;
-import my.homework.user_preset.User;
-import my.homework.user_preset.UserRepository;
+import my.homework.user.user_controller.UserSpecifications;
+import my.homework.user.user_dto.UserDto;
+import my.homework.user.user_preset.User;
+import my.homework.user.user_preset.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

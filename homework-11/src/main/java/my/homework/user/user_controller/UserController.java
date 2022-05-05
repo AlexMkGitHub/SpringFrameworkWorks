@@ -1,7 +1,7 @@
-package my.homework.user_controller;
+package my.homework.user.user_controller;
 
-import my.homework.user_dto.UserDto;
-import my.homework.user_service.UserService;
+import my.homework.user.user_dto.UserDto;
+import my.homework.user.user_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

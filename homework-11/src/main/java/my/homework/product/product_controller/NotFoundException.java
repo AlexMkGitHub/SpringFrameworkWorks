@@ -1,4 +1,4 @@
-package my.homework.product_controller;
+package my.homework.product.product_controller;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

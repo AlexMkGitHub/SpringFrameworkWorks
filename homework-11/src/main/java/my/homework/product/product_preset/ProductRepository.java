@@ -1,4 +1,4 @@
-package my.homework.product_preset;
+package my.homework.product.product_preset;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

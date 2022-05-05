@@ -1,4 +1,4 @@
-package my.homework.product_preset;
+package my.homework.product.product_preset;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

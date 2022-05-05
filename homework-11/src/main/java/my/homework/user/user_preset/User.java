@@ -1,4 +1,4 @@
-package my.homework.user_preset;
+package my.homework.user.user_preset;
 
 import javax.persistence.*;
 

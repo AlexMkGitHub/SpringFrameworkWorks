@@ -1,6 +1,6 @@
-package my.homework.product_controller;
+package my.homework.product.product_controller;
 
-import my.homework.product_preset.Product;
+import my.homework.product.product_preset.Product;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.math.BigDecimal;

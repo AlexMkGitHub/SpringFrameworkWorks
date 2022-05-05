@@ -1,6 +1,6 @@
-package my.homework.user_controller;
+package my.homework.user.user_controller;
 
-import my.homework.user_preset.User;
+import my.homework.user.user_preset.User;
 import org.springframework.data.jpa.domain.Specification;
 
 public final class UserSpecifications {

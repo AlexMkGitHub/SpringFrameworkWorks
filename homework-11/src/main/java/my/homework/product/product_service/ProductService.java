@@ -1,6 +1,6 @@
-package my.homework.product_service;
+package my.homework.product.product_service;
 
-import my.homework.product_dto.ProductDto;
+import my.homework.product.product_dto.ProductDto;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;

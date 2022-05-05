@@ -1,7 +1,7 @@
-package my.homework.user_dto;
+package my.homework.user.user_dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import my.homework.user_preset.UserRole;
+import my.homework.user.user_preset.UserRole;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

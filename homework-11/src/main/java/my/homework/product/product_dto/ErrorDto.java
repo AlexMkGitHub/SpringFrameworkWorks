@@ -1,6 +1,6 @@
-package my.homework.product_dto;
+package my.homework.product.product_dto;
 
-import my.homework.product_controller.NotFoundException;
+import my.homework.product.product_controller.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;

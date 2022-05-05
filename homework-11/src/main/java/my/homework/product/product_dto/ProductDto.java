@@ -1,4 +1,4 @@
-package my.homework.product_dto;
+package my.homework.product.product_dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
