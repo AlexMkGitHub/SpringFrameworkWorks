@@ -44,6 +44,8 @@
                     </th>
                     <th th:replace="fragments/user_sort_header.html :: sort_header ('Email', 'email')">
                     </th>
+                    <th th:replace="fragments/user_sort_header.html :: sort_header ('Role', 'role')">
+                    </th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -52,6 +54,7 @@
                     <th scope="row" th:text="${user.id}">1</th>
                     <td th:text="${user.username}">Alex</td>
                     <td th:text="${user.email}">Alex@mail.com</td>
+                    <td th:text="${user.userRole}">admin</td>
                     <td th:unless="${users.isEmpty()}">
                         <a class="btn btn-success" th:href="@{/user/{id}(id = ${user.id})}"><i class="fas fa-edit"></i></a>
                         <form class="d-inline" th:method="delete" th:action="@{/user/{id}/(id = ${user.id})}">

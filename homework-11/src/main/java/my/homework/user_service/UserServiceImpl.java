@@ -54,7 +54,8 @@ public class UserServiceImpl implements UserService {
                                 user.getId(),
                                 user.getUsername(),
                                 user.getEmail(),
-                                encoder.encode(user.getPassword())
+                                encoder.encode(user.getPassword()),
+                                user.getUserRole()
                         )));
     }
 
@@ -64,6 +65,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private static UserDto userToDto(User user) {
-        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), null);
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), null, user.getUserRole());
     }
 }

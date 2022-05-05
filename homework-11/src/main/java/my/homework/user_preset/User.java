@@ -19,14 +19,18 @@ public class User {
     @Column(nullable = false, length = 512)
     private String password;
 
+    @Column(nullable = false)
+    private UserRole userRole;
+
     public User() {
     }
 
-    public User(Long id, String username, String email, String password) {
+    public User(Long id, String username, String email, String password, UserRole userRole) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -59,5 +63,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }
