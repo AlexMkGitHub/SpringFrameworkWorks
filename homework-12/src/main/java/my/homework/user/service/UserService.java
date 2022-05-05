@@ -1,6 +1,6 @@
-package my.homework.user.user_service;
+package my.homework.user.service;
 
-import my.homework.user.user_dto.UserDto;
+import my.homework.user.dto.UserDto;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;

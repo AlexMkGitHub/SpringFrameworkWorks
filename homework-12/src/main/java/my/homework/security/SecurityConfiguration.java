@@ -18,7 +18,7 @@ public class SecurityConfiguration {
                 .and()
                 .withUser("quest")
                 .password(encoder.encode("password"))
-                .roles("QUEST");
+                .roles("GUEST");
         auth.userDetailsService(userDetailsService);
     }
 }

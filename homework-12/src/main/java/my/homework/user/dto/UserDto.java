@@ -1,11 +1,9 @@
-package my.homework.user.user_dto;
+package my.homework.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import my.homework.user.user_preset.UserRole;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class UserDto {
@@ -26,17 +24,14 @@ public class UserDto {
     @JsonIgnore
     private String matchingPassword;
 
-    @NotNull
-    private UserRole userRole;
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String email, String password, UserRole userRole) {
+    public UserDto(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -77,13 +72,5 @@ public class UserDto {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
     }
 }

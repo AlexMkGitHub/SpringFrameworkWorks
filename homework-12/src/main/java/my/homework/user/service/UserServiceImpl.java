@@ -1,10 +1,11 @@
-package my.homework.user.user_service;
+package my.homework.user.service;
 
-import my.homework.user.user_controller.UserSpecifications;
-import my.homework.user.user_dto.UserDto;
-import my.homework.user.user_preset.User;
-import my.homework.user.user_preset.UserRepository;
+import my.homework.user.controller.UserSpecifications;
+import my.homework.user.dto.UserDto;
+import my.homework.user.persist.User;
+import my.homework.user.persist.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -53,8 +54,7 @@ public class UserServiceImpl implements UserService {
                                 user.getId(),
                                 user.getUsername(),
                                 user.getEmail(),
-                                encoder.encode(user.getPassword()),
-                                user.getUserRole()
+                                encoder.encode(user.getPassword())
                         )));
     }
 
@@ -64,6 +64,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private static UserDto userToDto(User user) {
-        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), null, user.getUserRole());
+        return new UserDto(user.getId(), user.getUsername(), user.getEmail(), null);
     }
 }

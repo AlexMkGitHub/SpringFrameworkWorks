@@ -1,8 +1,8 @@
 package my.homework.rest;
 
-import my.homework.user.user_controller.NotFoundException;
-import my.homework.user.user_dto.UserDto;
-import my.homework.user.user_service.UserService;
+import my.homework.user.controller.NotFoundException;
+import my.homework.user.dto.UserDto;
+import my.homework.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

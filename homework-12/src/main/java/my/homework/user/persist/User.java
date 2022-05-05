@@ -1,4 +1,4 @@
-package my.homework.user.user_preset;
+package my.homework.user.persist;
 
 import javax.persistence.*;
 
@@ -19,18 +19,14 @@ public class User {
     @Column(nullable = false, length = 512)
     private String password;
 
-    @Column(nullable = false)
-    private UserRole userRole;
-
     public User() {
     }
 
-    public User(Long id, String username, String email, String password, UserRole userRole) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -63,13 +59,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
     }
 }
