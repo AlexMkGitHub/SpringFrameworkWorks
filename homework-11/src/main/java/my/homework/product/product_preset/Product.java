@@ -1,27 +1,26 @@
-package my.homework.dto;
+package my.homework.product.product_preset;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-public class ProductDto {
+@Entity
+@Table(name = "products")
+public class Product {
+
+    @Id
+    @GeneratedValue
     private Long id;
 
-    @NotBlank
-    @NotNull
+    @Column(nullable = false)
     private String title;
 
-    @Min(0)
-    @Max(100000)
-    @NotNull
+    @Column
     private BigDecimal price;
 
-    public ProductDto() {
+    public Product() {
     }
 
-    public ProductDto(Long id, String title, BigDecimal price) {
+    public Product(Long id, String title, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.price = price;
