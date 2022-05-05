@@ -1,4 +1,4 @@
-package my.homework.controller;
+package my.homework.user_controller;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

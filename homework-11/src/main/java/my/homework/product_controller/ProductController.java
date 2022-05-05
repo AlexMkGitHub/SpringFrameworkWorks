@@ -1,8 +1,8 @@
-package my.homework.controller;
+package my.homework.product_controller;
 
-import my.homework.dto.ErrorDto;
-import my.homework.dto.ProductDto;
-import my.homework.service.ProductService;
+import my.homework.product_dto.ErrorDto;
+import my.homework.product_dto.ProductDto;
+import my.homework.product_service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

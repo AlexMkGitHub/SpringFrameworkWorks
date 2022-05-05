@@ -1,7 +1,7 @@
-package my.homework.service;
+package my.homework.product_service;
 
-import my.homework.controller.ProductSpecifications;
-import my.homework.dto.ProductDto;
+import my.homework.product_controller.ProductSpecifications;
+import my.homework.product_dto.ProductDto;
 import my.homework.product_preset.Product;
 import my.homework.product_preset.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

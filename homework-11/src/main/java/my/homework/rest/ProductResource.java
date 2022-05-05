@@ -1,9 +1,9 @@
 package my.homework.rest;
 
-import my.homework.controller.NotFoundException;
-import my.homework.dto.ErrorDto;
-import my.homework.dto.ProductDto;
-import my.homework.service.ProductService;
+import my.homework.product_controller.NotFoundException;
+import my.homework.product_dto.ErrorDto;
+import my.homework.product_dto.ProductDto;
+import my.homework.product_service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package my.homework.controller;
+package my.homework.product_controller;
 
 import my.homework.product_preset.Product;
 import org.springframework.data.jpa.domain.Specification;
