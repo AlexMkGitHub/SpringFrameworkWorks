@@ -1,22 +1,29 @@
 package my.homework.rest;
 
 import my.homework.user.controller.NotFoundException;
+import my.homework.user.controller.UserController;
 import my.homework.user.dto.UserDto;
 import my.homework.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
-// http://localhost:8088/mvc-app/swagger-ui/index.html
+// http://localhost:8080/swagger-ui/index.html
 @RequestMapping("/rest/v1/user")
 @RestController
 public class UserResource {
 
     private final UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     public UserResource(UserService userService) {
@@ -28,7 +35,13 @@ public class UserResource {
                                   @RequestParam Optional<String> emailFilter,
                                   @RequestParam Optional<Integer> page,
                                   @RequestParam Optional<Integer> size,
-                                  @RequestParam Optional<String> sortField) {
+                                  @RequestParam Optional<String> sortField,
+                                  Authentication auth) {
+        if (auth != null) {
+            logger.info("Current user {}", auth.getName());
+        } else {
+            logger.info("Current user is anonymous!");
+        }
         String usernameFilterValue = usernameFilter
                 .filter(s -> !s.isBlank())
                 .orElse(null);
@@ -54,6 +67,7 @@ public class UserResource {
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
+    @Secured("ROLE_SUPER_ADMIN")
     @PostMapping
     public UserDto create(@RequestBody UserDto user) {
         if (user.getId() != null) {
@@ -62,6 +76,7 @@ public class UserResource {
         return userService.save(user);
     }
 
+    @Secured("ROLE_SUPER_ADMIN")
     @PutMapping
     public UserDto update(@RequestBody UserDto user) {
         if (user.getId() == null) {

@@ -1,9 +1,15 @@
 package my.homework.user.controller;
 
 import my.homework.user.dto.UserDto;
+import my.homework.user.persist.RoleRepository;
 import my.homework.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,11 +22,14 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
@@ -29,7 +38,13 @@ public class UserController {
                            @RequestParam Optional<Integer> page,
                            @RequestParam Optional<Integer> size,
                            @RequestParam Optional<String> sortField,
+                           Authentication auth,
                            Model model) {
+        if (auth != null) {
+            logger.info("Current user {}", auth.getName());
+        } else {
+            logger.info("Current user is anonymous!");
+        }
         String usernameFilterValue = usernameFilter
                 .filter(s -> !s.isBlank())
                 .orElse(null);
@@ -52,6 +67,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String form(@PathVariable long id, Model model) {
+        model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("user", userService.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found")));
         return "user_form";
@@ -59,16 +75,20 @@ public class UserController {
 
     @GetMapping("/new")
     public String form(Model model) {
+        model.addAttribute("roles", roleRepository.findAll());
         model.addAttribute("user", new UserDto());
         return "user_form";
     }
 
+    @Secured("ROLE_SUPER_ADMIN")
     @PostMapping
-    public String save(@Valid @ModelAttribute("user") UserDto user, BindingResult binding) {
+    public String save(@Valid @ModelAttribute("user") UserDto user, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
+            model.addAttribute("roles", roleRepository.findAll());
             return "user_form";
         }
         if (!user.getPassword().equals(user.getMatchingPassword())) {
+            model.addAttribute("roles", roleRepository.findAll());
             binding.rejectValue("password", "", "Password not match");
             return "user_form";
         }
@@ -76,6 +96,9 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated() && isRememberMe()")
+    @Secured("ROLE_SUPER_ADMIN")
     @DeleteMapping("/{id}")
     public String delete(@PathVariable long id) {
         userService.deleteById(id);

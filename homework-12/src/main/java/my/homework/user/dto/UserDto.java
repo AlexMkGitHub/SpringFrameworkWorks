@@ -1,10 +1,12 @@
 package my.homework.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import my.homework.user.persist.Role;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 public class UserDto {
 
@@ -24,14 +26,17 @@ public class UserDto {
     @JsonIgnore
     private String matchingPassword;
 
+    private Set<Role> roles;
+
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String email, String password) {
+    public UserDto(Long id, String username, String email, String password, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -72,5 +77,20 @@ public class UserDto {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "roles=" + roles +
+                '}';
     }
 }

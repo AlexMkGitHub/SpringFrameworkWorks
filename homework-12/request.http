@@ -1,0 +1,43 @@
+GET http://127.0.0.1:8080/rest/v1/product/all
+
+###
+
+GET http://127.0.0.1:8080//rest/v1/user/all
+
+###
+
+GET http://127.0.0.1:8080//rest/v1/user/100/id
+
+###
+
+POST  http://127.0.0.1:8080/rest/v1/product
+Content-Type: application/json
+
+ {
+      "title": "Bread1332",
+      "price": 0.0
+    }
+
+###
+
+POST  http://127.0.0.1:8080/rest/v1/user
+Authorization: Basic admin admin
+Content-Type: application/json
+
+{
+  "username": "Bread1332",
+  "email": "ddfdf@ewrgw.jytu",
+  "password": "123344556"
+}
+
+###
+
+PUT http://127.0.0.1:8080/rest/v1/product
+Content-Type: application/json
+
+{
+  "id":0,
+  "title": "Bread12",
+  "price": 320.0
+}
+
