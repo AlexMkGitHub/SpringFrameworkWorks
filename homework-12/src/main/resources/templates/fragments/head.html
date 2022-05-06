@@ -42,7 +42,10 @@
             </button>
         </form>
 
-        <!-- TODO добавить кнопку логина -->
+        <form sec:authorize="isAnonymous()"
+              class="form-inline my-2 my-lg-0">
+            <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}"> Login </a>
+        </form>
     </div>
 </nav>
 
